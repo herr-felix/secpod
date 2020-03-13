@@ -13,5 +13,5 @@
   :main secpod-server.core
   :skip-aot secpod-server.core
   :target-path "target/%s"
-  :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"]
+  :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory" "--illegal-access=deny"]
   :profiles {:uberjar {:aot :all}})
