@@ -13,5 +13,19 @@ The project is splited in 2 parts:
 - The ssh server itself. It is responsible for storing and organizing all the tracks' blobs and authenticating the users.
 
 ## Track blob
-A track blob is an opus audio file with a name looking like `1985-04-12T23:20:50.52Z_3a4d6027.opus`, where `1985-04-12T23:20:50.52Z` is the time which the recording of the track started and `c0a80066` is the IP address of the client with the `.` and in hexadecimal.
+A track blob is an opus audio file with a name looking like `1985-04-12T23:20:50.52Z_3a4d6027.opus`, where `1985-04-12T23:20:50.52Z` is the time which the recording of the track started and `c0a80066` is the IP address of the client in hexadecimal.
 a
+
+## Commands
+
+A call to a secpod server looks like `ssh -i ~/.ssh/id_rsa room@host "command"`
+
+ - `claim` : **stdin**: the public key of a new admin. The room must not exists.
+ - `apotheosize` : **stdin**: the public key of a new admin. Connection must be from an admin.
+ - `introduce` : **stdin**: the public key authorized to connect to the room. Connection must be from an admin.
+ - `keys` : **stdout** All the public keys known to the room. Connection must be from an admin.
+ - `forget` : **stdin**: the public key to ban. Connection must be from an admin.
+ - `record [label]` : **stdin**: An audio stream. Connection must known to the room. `label` is a string matching `[A-Za-z0-9-_]{,32}` and will be added to track name. Usefule for post production. If `label` doesn't match `[A-Za-z0-9-_]+`, it will be simply be ignored.
+ - `harvest` **stdout** A gzipped tar archive stream containing all the tracks since the last `clean` command and a makefile for automaticaly mix all those tracks with the right timing. Connection must be from an admin.
+ - `clean` : Will clear all tracks in the room. Connection must be from an admin.
+ - `burn` : "forget" all the keys and "clean" the room so it can be "claimed" again.
