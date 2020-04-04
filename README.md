@@ -25,7 +25,7 @@ A call to a secpod server looks like `ssh -i ~/.ssh/id_rsa room@host "command"`
  - `introduce` : **stdin**: the public key authorized to connect to the room. Connection must be from an admin.
  - `keys` : **stdout** All the public keys known to the room. Connection must be from an admin.
  - `forget` : **stdin**: the public key to ban. Connection must be from an admin.
- - `record [label]` : **stdin**: An audio stream. Connection must known to the room. `label` is a string matching `[A-Za-z0-9-_]{,32}` and will be added to track name. Usefule for post production. If `label` doesn't match `[A-Za-z0-9-_]+`, it will be simply be ignored.
+ - `record [label]` : **stdin**: An audio stream. Connection must known to the room. `label` is a string matching `[a-zA-z0-9-_]{1,32}` and will be added to track name. Usefule for post production. If `label` doesn't match `[a-zA-z0-9-_]{1,32}`, it will be simply be ignored.
  - `harvest` **stdout** A gzipped tar archive stream containing all the tracks since the last `clean` command and a makefile for automaticaly mix all those tracks with the right timing. Connection must be from an admin.
  - `clean` : Will clear all tracks in the room. Connection must be from an admin.
  - `burn` : "forget" all the keys and "clean" the room so it can be "claimed" again.
